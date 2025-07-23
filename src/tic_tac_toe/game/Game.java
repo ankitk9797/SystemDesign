@@ -26,16 +26,21 @@ public class Game {
             board.printBoard();
             Player player = players.poll();
             Scanner scanner = new Scanner(System.in);
+            System.out.println(player.name +" turn");
+            System.out.print("Enter x:");
             int x = scanner.nextInt();
+            System.out.print("Enter y:");
             int y = scanner.nextInt();
             if(!board.addPiece(player.piece,x,y)){
                 System.out.println("Invalid entry");
+                players.addFirst(player);
             } else {
                 if(board.isWinner(x,y))
                 {
                     System.out.println(player.name + " is winner");
                     return;
                 }
+                players.addLast(player);
             }
         }
     }

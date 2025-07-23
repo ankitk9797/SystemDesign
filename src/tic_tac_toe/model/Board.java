@@ -17,7 +17,9 @@ public class Board {
     }
 
     public boolean addPiece(Piece piece, int x, int y){
-        if(!board[x][y].pieceType.getValue().equals(PieceType.EMPTY.getValue()))
+        if(x>=3 || y>=3 || x<0 || y<0)
+            return false;
+        if(!(board[x][y].pieceType == PieceType.EMPTY))
             return false;
         board[x][y]=piece;
         return true;
@@ -26,8 +28,8 @@ public class Board {
     public boolean isWinner(int x, int y){
         boolean isWinner = true;
         for(int i=1;i<size;i++){
-            if(board[x][y].pieceType.getValue().equals(PieceType.EMPTY.getValue())
-               || !board[x][i].pieceType.getValue().equals(board[x][0].pieceType.getValue()))
+            if(board[x][i].pieceType == PieceType.EMPTY
+               || !(board[x][i].pieceType == board[x][0].pieceType))
             {
                 isWinner = false;
                 break;
@@ -37,8 +39,8 @@ public class Board {
             return true;
         isWinner = true;
         for(int i=1;i<size;i++){
-            if(board[x][y].pieceType.getValue().equals(PieceType.EMPTY.getValue())
-                    || !board[i][y].pieceType.getValue().equals(board[0][y].pieceType.getValue()))
+            if(board[i][y].pieceType == PieceType.EMPTY
+                    || !(board[i][y].pieceType == board[0][y].pieceType))
             {
                 isWinner = false;
                 break;
@@ -48,8 +50,8 @@ public class Board {
             return true;
         isWinner = true;
         for(int i=1;i<size;i++){
-            if(board[x][y].pieceType.getValue().equals(PieceType.EMPTY.getValue())
-                    || !board[i][i].pieceType.getValue().equals(board[0][0].pieceType.getValue()))
+            if(board[i][i].pieceType == PieceType.EMPTY
+                    || !(board[i][i].pieceType == board[0][0].pieceType))
             {
                 isWinner = false;
                 break;
@@ -61,8 +63,8 @@ public class Board {
         int i=size-2;
         int j=1;
         while(i>=0){
-            if(board[x][y].pieceType.getValue().equals(PieceType.EMPTY.getValue())
-                    || !board[i][j].pieceType.getValue().equals(board[size-1][0].pieceType.getValue()))
+            if(board[i][j].pieceType == PieceType.EMPTY
+                    || !(board[i][j].pieceType == board[size-1][0].pieceType))
             {
                 isWinner = false;
                 break;
