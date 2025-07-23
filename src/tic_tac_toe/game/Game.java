@@ -1,0 +1,42 @@
+package tic_tac_toe.game;
+
+import tic_tac_toe.model.Board;
+import tic_tac_toe.model.PieceO;
+import tic_tac_toe.model.PieceX;
+import tic_tac_toe.model.Player;
+
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Scanner;
+
+public class Game {
+    Deque<Player> players;
+    Board board;
+    Game(){
+        board = new Board();
+        players = new LinkedList<>();
+        Player player1 = new Player("Player1", new PieceX());
+        Player player2 = new Player("Player2", new PieceO());
+        players.addFirst(player1);
+        players.add(player2);
+    }
+
+    public void start(){
+        while (true){
+            board.printBoard();
+            Player player = players.poll();
+            Scanner scanner = new Scanner(System.in);
+            int x = scanner.nextInt();
+            int y = scanner.nextInt();
+            if(!board.addPiece(player.piece,x,y)){
+                System.out.println("Invalid entry");
+            } else {
+                if(board.isWinner(x,y))
+                {
+                    System.out.println(player.name + " is winner");
+                    return;
+                }
+            }
+        }
+    }
+}
