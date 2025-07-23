@@ -1,5 +1,6 @@
 package tic_tac_toe.game;
 
+import tic_tac_toe.PieceType;
 import tic_tac_toe.model.Board;
 import tic_tac_toe.model.PieceO;
 import tic_tac_toe.model.PieceX;
@@ -35,7 +36,7 @@ public class Game {
                 System.out.println("Invalid entry");
                 players.addFirst(player);
             } else {
-                if(board.isWinner(x,y))
+                if(isWinner(x,y))
                 {
                     System.out.println(player.name + " is winner");
                     return;
@@ -43,5 +44,56 @@ public class Game {
                 players.addLast(player);
             }
         }
+    }
+    public boolean isWinner(int x, int y){
+        boolean isWinner = true;
+        for(int i=1;i<board.size;i++){
+            if(board.board[x][i].pieceType == PieceType.EMPTY
+                    || !(board.board[x][i].pieceType == board.board[x][0].pieceType))
+            {
+                isWinner = false;
+                break;
+            }
+        }
+        if(isWinner)
+            return true;
+        isWinner = true;
+        for(int i=1;i<board.size;i++){
+            if(board.board[i][y].pieceType == PieceType.EMPTY
+                    || !(board.board[i][y].pieceType == board.board[0][y].pieceType))
+            {
+                isWinner = false;
+                break;
+            }
+        }
+        if(isWinner)
+            return true;
+        isWinner = true;
+        for(int i=1;i<board.size;i++){
+            if(board.board[i][i].pieceType == PieceType.EMPTY
+                    || !(board.board[i][i].pieceType == board.board[0][0].pieceType))
+            {
+                isWinner = false;
+                break;
+            }
+        }
+        if(isWinner)
+            return true;
+        isWinner = true;
+        int i=board.size-2;
+        int j=1;
+        while(i>=0){
+            if(board.board[i][j].pieceType == PieceType.EMPTY
+                    || !(board.board[i][j].pieceType == board.board[board.size-1][0].pieceType))
+            {
+                isWinner = false;
+                break;
+            }
+            i--;
+            j++;
+        }
+        if(isWinner)
+            return true;
+        return false;
     }
 }
