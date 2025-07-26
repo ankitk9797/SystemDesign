@@ -1,5 +1,5 @@
 # Low Level System Design
 ## Tic Tac Toe
-## Snake Laddeer
+## Snake Ladder
 ## Parking Lot
 ## Uber service
